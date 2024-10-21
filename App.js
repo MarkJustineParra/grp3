@@ -1,20 +1,30 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import React, { useState } from 'react';
+import { StyleSheet, View } from 'react-native';
+import Login from './Login';
+import Dashboard from './Dashboard';
+import AboutUs from './AboutUs';
 
-export default function App() {
+const App = () => {
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [showAboutUs, setShowAboutUs] = useState(false);
+
   return (
     <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
+      {showAboutUs ? (
+        <AboutUs setIsLoggedIn={setIsLoggedIn} setShowAboutUs={setShowAboutUs} />
+      ) : isLoggedIn ? (
+        <Dashboard setIsLoggedIn={setIsLoggedIn} setShowAboutUs={setShowAboutUs} />
+      ) : (
+        <Login setIsLoggedIn={setIsLoggedIn} />
+      )}
     </View>
   );
-}
+};
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
   },
 });
+
+export default App;
