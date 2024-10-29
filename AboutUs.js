@@ -3,6 +3,7 @@ import { View, Text, TouchableOpacity, StyleSheet, Image, Modal, FlatList } from
 import { Ionicons } from '@expo/vector-icons';
 
 const AboutUs = ({ setIsLoggedIn, setShowAboutUs }) => {
+  
   const [modalVisible, setModalVisible] = useState(false);
   const [selectedPhoto, setSelectedPhoto] = useState(null);
   const [logoutConfirmationVisible, setLogoutConfirmationVisible] = useState(false);
@@ -28,11 +29,11 @@ const AboutUs = ({ setIsLoggedIn, setShowAboutUs }) => {
   );
 
   const handleLogout = () => {
-    setIsLoggedIn(false); // Set logged in state to false
+    setIsLoggedIn(false); // Update parent state to log out
     setLogoutConfirmationVisible(false); // Close the confirmation modal
-    // You can navigate to the login screen if needed
-    // navigation.navigate('Login');
+    setShowAboutUs(false); // Optionally, hide the About Us view immediately
   };
+
   return (
     <View style={styles.container}>
       <Image source={require('./assets/manong.jpg')} style={styles.backgroundImage} />
@@ -40,7 +41,6 @@ const AboutUs = ({ setIsLoggedIn, setShowAboutUs }) => {
       <View style={styles.aboutUsCard}>
         <Text style={styles.aboutUsTitle}>ABOUT US</Text>
         <Text style={styles.aboutUsSubtitle}>BSIT 3B Group 3</Text>
-        
         <Image source={require('./assets/heart_icon.png')} style={styles.aboutUsIcon} />
       </View>
 
@@ -52,8 +52,8 @@ const AboutUs = ({ setIsLoggedIn, setShowAboutUs }) => {
         contentContainerStyle={styles.photoContainer}
         showsVerticalScrollIndicator={false}
       />
-      
-<View style={styles.footer}> 
+
+      <View style={styles.footer}> 
         <TouchableOpacity style={styles.footerButton} onPress={() => setShowAboutUs(false)}> 
           <Ionicons name="home-outline" size={30} color="#000" />
           <Text style={styles.footerButtonText}>Home</Text>
@@ -91,27 +91,26 @@ const AboutUs = ({ setIsLoggedIn, setShowAboutUs }) => {
       )}
 
       {/* Logout Confirmation Modal */}
-<Modal
-  visible={logoutConfirmationVisible}
-  animationType="slide"
-  transparent={true}
-  onRequestClose={() => setLogoutConfirmationVisible(false)}
->
-  <View style={styles.modalContainer}>
-    <View style={styles.confirmationCard}>
-      <Text style={styles.confirmationText}>Do you want to log out?</Text>
-      <View style={styles.confirmationButtons}>
-        <TouchableOpacity style={styles.confirmButton} onPress={handleLogout}>
-          <Text style={styles.confirmButtonText}>Yes</Text>
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.cancelButton} onPress={() => setLogoutConfirmationVisible(false)}>
-          <Text style={styles.cancelButtonText}>No</Text>
-        </TouchableOpacity>
-      </View>
-    </View>
-  </View>
-</Modal>
-
+      <Modal
+        visible={logoutConfirmationVisible}
+        animationType="slide"
+        transparent={true}
+        onRequestClose={() => setLogoutConfirmationVisible(false)}
+      >
+        <View style={styles.modalContainer}>
+          <View style={styles.confirmationCard}>
+            <Text style={styles.confirmationText}>Do you want to log out?</Text>
+            <View style={styles.confirmationButtons}>
+              <TouchableOpacity style={styles.confirmButton} onPress={handleLogout}>
+                <Text style={styles.confirmButtonText}>Yes</Text>
+              </TouchableOpacity>
+              <TouchableOpacity style={styles.cancelButton} onPress={() => setLogoutConfirmationVisible(false)}>
+                <Text style={styles.cancelButtonText}>No</Text>
+              </TouchableOpacity>
+            </View>
+          </View>
+        </View>
+      </Modal>
     </View>
   );
 };
@@ -284,4 +283,3 @@ const styles = StyleSheet.create({
 });
 
 export default AboutUs;
-

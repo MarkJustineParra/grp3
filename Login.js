@@ -56,7 +56,7 @@ const Login = ({ setIsLoggedIn }) => {
           Alert.alert('Invalid OTP', 'Please enter the correct OTP.');
         }
       } else {
-        Alert.alert('OTP Not Sent', 'Please send OTP before verifying.');
+        sendOtp();
       }
     }
   };

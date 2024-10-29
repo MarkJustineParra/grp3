@@ -9,7 +9,7 @@ import GetStarted from './GetStarted';  // Import GetStarted
 
 
 const App = () => {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(true);
   const [showAboutUs, setShowAboutUs] = useState(false);
   const [showCreateAccount, setShowCreateAccount] = useState(false);
   const [showGetStarted, setShowGetStarted] = useState(true); // New state for GetStarted
